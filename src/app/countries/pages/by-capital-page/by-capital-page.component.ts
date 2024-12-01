@@ -10,6 +10,7 @@ import { Country } from '../../interfaces/country';
 export class ByCapitalPageComponent {
 
   public countries:Country[]=[];
+  public loadingPage:boolean=false;
 
   constructor(
     private readonly countriesService:CountriesService
@@ -21,10 +22,12 @@ export class ByCapitalPageComponent {
 
 
   searchByCapital(term:string):void{
+    this.loadingPage=true;
     
     this.countriesService.searchCapital(term)
     .subscribe(countries=>{
       this.countries=countries;
+      this.loadingPage=false;
     });
     
     
